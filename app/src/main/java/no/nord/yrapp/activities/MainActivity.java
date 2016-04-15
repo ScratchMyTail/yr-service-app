@@ -1,15 +1,14 @@
-package no.nord.yrapp;
+package no.nord.yrapp.activities;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -17,6 +16,9 @@ import com.google.gson.GsonBuilder;
 import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.SmartLocation;
 import io.nlopez.smartlocation.location.config.LocationParams;
+import no.nord.yrapp.R;
+import no.nord.yrapp.YrService;
+import no.nord.yrapp.model.YrURL;
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.GsonConverterFactory;
@@ -95,6 +97,28 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        if(id == R.id.action_search){
+            Intent intent = new Intent(this, SearchActivity.class);
+            startActivityForResult(intent, 1);
+
+            return true;
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+            TextView textView = (TextView) findViewById(R.id.hello);
+            textView.setText(data.getExtras().getString("sted"));
+
+
+
+        }
+        catch(Exception ex){
+            Log.d(TAG, "ingen plass kom tilbake!");
+        }
+
     }
 }

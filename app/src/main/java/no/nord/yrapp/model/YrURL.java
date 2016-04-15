@@ -1,4 +1,4 @@
-package no.nord.yrapp;
+package no.nord.yrapp.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
